@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)file:///C:/Users/A00940/Downloads/Tabla2.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD de Ejemplo</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>CRUD de Ejemplo</h1>
+    <form id="crudForm">
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" required="">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" required="">
+        <label for="age">Edad:</label>
+        <input type="number" id="age" name="age" required="">
+        <label for="city">Ciudad:</label>
+        <input type="text" id="city" name="city" required="">
+        <button type="submit">Agregar</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>DNI</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Ciudad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="crudTableBody">
+            <!-- Los registros se agregarán aquí -->
+        <tr>
+                <td>132564</td>
+                <td>Moises</td>
+                <td>132</td>
+                <td>Lima</td>
+                <td>
+                    <button onclick="editRow(this)">Editar</button>
+                    <button onclick="deleteRow(this)">Eliminar</button>
+                </td>
+            </tr><tr>
+                <td>r4</td>
+                <td>r</td>
+                <td>1</td>
+                <td>barca</td>
+                <td>
+                    <button onclick="editRow(this)">Editar</button>
+                    <button onclick="deleteRow(this)">Eliminar</button>
+                </td>
+            </tr></tbody>
+    </table>
+
+    <script>
+        document.getElementById('crudForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const dni = document.getElementById('dni').value;
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const city = document.getElementById('city').value;
+
+            const tableBody = document.getElementById('crudTableBody');
+            const row = document.createElement('tr');
+
+            row.innerHTML = `
+                <td>${dni}</td>
+                <td>${name}</td>
+                <td>${age}</td>
+                <td>${city}</td>
+                <td>
+                    <button onclick="editRow(this)">Editar</button>
+                    <button onclick="deleteRow(this)">Eliminar</button>
+                </td>
+            `;
+
+            tableBody.appendChild(row);
+            this.reset();
+        });
+
+        function editRow(button) {
+            const row = button.parentElement.parentElement;
+            document.getElementById('dni').value = row.cells[0].innerText;
+            document.getElementById('name').value = row.cells[1].innerText;
+            document.getElementById('age').value = row.cells[2].innerText;
+            document.getElementById('city').value = row.cells[3].innerText;
+            row.remove();
+        }
+
+        function deleteRow(button) {
+            button.parentElement.parentElement.remove();
+        }
+    </script>
+
+
+</body></html>
